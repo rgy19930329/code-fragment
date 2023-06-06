@@ -3,7 +3,7 @@
  */
 
 export default class Observers {
-  id = "";
+  id = '';
 
   onObj = {};
 
@@ -37,7 +37,7 @@ export default class Observers {
   off(key, fn) {
     const onObjNews = [];
     const oneObjNews = [];
-    if (typeof fn === "function") {
+    if (typeof fn === 'function') {
       if (Array.isArray(this.onObj[key])) {
         this.onObj[key].forEach((item) => {
           if (item !== fn) {
@@ -60,7 +60,7 @@ export default class Observers {
   }
 
   trigger(key, ...args) {
-    if (typeof key !== "string") {
+    if (typeof key !== 'string') {
       return;
     }
 
