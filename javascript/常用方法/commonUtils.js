@@ -129,9 +129,9 @@ function commonTemplateRender(template, data) {
 
 /**
  * 对象设置属性
- * @param {*} obj 
- * @param {*} key 
- * @param {*} val 
+ * @param {*} obj
+ * @param {*} key
+ * @param {*} val
  */
 function deepSet(obj, key, val) {
   try {
@@ -144,5 +144,29 @@ function deepSet(obj, key, val) {
     }
   } catch (e) {
     console.warn(`${key} value ${val} set fail`, e);
+  }
+}
+
+/**
+ * 通过文件流下载文件
+ * @param {*} stream
+ * @param {*} name
+ * @param {*} extension 文件后缀
+ * @param {*} type 文件类型
+ */
+export function downloadFile(
+  stream,
+  name,
+  extension = 'xls',
+  type = 'application/vnd.ms-excel'
+) {
+  const blob = new Blob([stream], { type });
+  const fileName = `${name}.${extension}`;
+  const link = document.createElement('a');
+  if ('download' in link) {
+    link.download = fileName;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    URL.revokeObjectURL(link.href);
   }
 }
