@@ -68,28 +68,24 @@ function isEmptyObject(obj) {
 }
 
 /**
- * 堆叠数组（一维转二维）
- * @param {*} array
- * @param {*} number
+ * 简单数据类型值判空
+ * @param {*} value
  * @returns
  */
-function StackingArray(array, number = 2) {
-  const result = [];
-
-  for (let i = 0, len = array.length; i < len; i += number) {
-    if (i % number === 0) {
-      if (!result[i / number]) {
-        result[i / number] = [];
-        for (let j = 0; j < number; j++) {
-          if (i + j < len) {
-            result[i / number].push(array[i + j]);
-          }
-        }
-      }
-    }
+function isPureEmpty(value) {
+  if (value === undefined) {
+    return true;
   }
-
-  return result;
+  if (value === null) {
+    return true;
+  }
+  if (value === '') {
+    return true;
+  }
+  if (Array.isArray(value) && value.length === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -149,12 +145,12 @@ function deepSet(obj, key, val) {
 
 /**
  * 通过文件流下载文件
- * @param {*} stream
- * @param {*} name
+ * @param {*} stream 文件流
+ * @param {*} name 文件名（不带后缀）
  * @param {*} extension 文件后缀
  * @param {*} type 文件类型
  */
-export function downloadFile(
+function downloadFile(
   stream,
   name,
   extension = 'xls',
