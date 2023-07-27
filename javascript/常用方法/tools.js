@@ -22,7 +22,7 @@ function dfs(node, visit, f = 'child') {
  * @param {*} number
  * @returns
  */
-function stacking(array, number = 2) {
+function stackArray(array, number = 2) {
   const result = [];
 
   for (let i = 0, len = array.length; i < len; i += number) {
@@ -36,6 +36,20 @@ function stacking(array, number = 2) {
         }
       }
     }
+  }
+
+  return result;
+}
+
+/**
+ * 压扁数组（二维转一维）
+ * @param {*} array 
+ */
+function squashArray(array) {
+  let result = [];
+
+  for (let i = 0; i < array.length; i++) {
+    result = [...result, ...array[i]];
   }
 
   return result;
